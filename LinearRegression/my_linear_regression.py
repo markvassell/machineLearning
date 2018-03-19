@@ -24,19 +24,8 @@ if __name__ == '__main__':
     posts_data = X = posts.ix[:, (0, 1, 2)]
     posts_data_name  = ['wdr','dissim','leven']
     print(y)
-    # checking independence between features
-    # view relationship
-    sb.regplot(x='wdr', y='leven', data=posts, scatter=True)
 
-
-    #sb.boxplot(x='wdr', y='leven', data=posts, palette='hls')
-    plt.show()
-
-
-    wdr = posts['wdr']
-    dissim = posts['dissim']
-    leven = posts['leven']
-    # check how correlated the wdr and dissim.  Below zero is less than 50% correlation
+    # check how correlated the attributes.  Below zero is less than 50% correlation
     sb.heatmap(posts_data.corr())
     plt.show()
     spearmanr_coefficient, p_value = spearmanr(wdr, leven)
