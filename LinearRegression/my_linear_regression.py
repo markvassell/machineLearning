@@ -28,8 +28,8 @@ if __name__ == '__main__':
     # check how correlated the attributes.  Below zero is less than 50% correlation
     sb.heatmap(posts_data.corr())
     plt.show()
-    spearmanr_coefficient, p_value = spearmanr(wdr, leven)
-    print('Spearmnar Rank Coorelation Coefficient %0.3f' %spearmanr_coefficient)
+    # spearmanr_coefficient, p_value = spearmanr(wdr, leven, )
+    # print('Spearmnar Rank Coorelation Coefficient %0.3f' %spearmanr_coefficient)
 
 
     print(posts.isnull().sum())
