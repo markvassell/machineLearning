@@ -16,7 +16,7 @@ from sklearn.metrics import confusion_matrix
 
 
 if __name__ == '__main__':
-    filename = 'Data/rescaled.csv'
+    filename = 'Data/zscore.csv'
     posts = pd.read_csv(filename)
     print(posts.head())
 
@@ -27,7 +27,9 @@ if __name__ == '__main__':
 
     # check how correlated the attributes.  Below zero is less than 50% correlation
     sb.heatmap(posts_data.corr())
+    plt.savefig('Results/zscore/attribute_correlations.PNG', format='png')
     plt.show()
+
     # spearmanr_coefficient, p_value = spearmanr(wdr, leven, )
     # print('Spearmnar Rank Coorelation Coefficient %0.3f' %spearmanr_coefficient)
 
@@ -35,6 +37,7 @@ if __name__ == '__main__':
     print(posts.isnull().sum())
     # Checking if our target is ordinary or binary
     sb.countplot(x='is_bot', data=posts, palette='hls')
+    plt.savefig('Results/zscore/binary_target_check.PNG', format='png')
     plt.show()
     print(posts.info())
 
@@ -48,10 +51,12 @@ if __name__ == '__main__':
     confusion_matrix = confusion_matrix(y_test, y_pred)
     print('confusion_matrix')
     print(confusion_matrix)
-    sb.heatmap(confusion_matrix)
+    sb.heatmap(confusion_matrix,annot=True)
+    plt.savefig('Results/zscore/confusion_matrix.PNG', format='png')
     plt.show()
 
-    print(metrics.classification_report(y_test, y_pred))
+    with open('Results/zscore/stats.txt', 'w+') as statsFile:
+        statsFile.write(metrics.classification_report(y_test, y_pred))
     # x = scale(posts_data)
     # # initialize logistic regression model
     # LogReg = LogisticRegression()
