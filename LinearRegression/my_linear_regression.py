@@ -16,49 +16,51 @@ from sklearn.metrics import confusion_matrix
 
 
 if __name__ == '__main__':
-    filename = 'Data/zscore.csv'
-    posts = pd.read_csv(filename)
-    print(posts.head())
+    for name in ['zscore','recoded','ranked','rescaled']:
+        embedding = name
+        filename = 'Data/'+embedding+'.csv'
+        posts = pd.read_csv(filename)
+        print(posts.head())
 
-    y = posts.ix[:, 3].values
-    posts_data = X = posts.ix[:, (0, 1, 2)]
-    posts_data_name  = ['wdr','dissim','leven']
-    print(y)
+        y = posts.ix[:, 3].values
+        posts_data = X = posts.ix[:, (0, 1, 2)]
+        posts_data_name  = ['wdr','dissim','leven']
+        print(y)
 
-    # check how correlated the attributes.  Below zero is less than 50% correlation
-    sb.heatmap(posts_data.corr())
-    plt.savefig('Results/zscore/attribute_correlations.PNG', format='png')
-    plt.show()
+        # check how correlated the attributes.  Below zero is less than 50% correlation
+        sb.heatmap(posts_data.corr(),annot=True,cmap="YlGnBu")
+        plt.savefig('Results/'+embedding+'/attribute_correlations.PNG', format='png')
+        plt.show()
 
-    # spearmanr_coefficient, p_value = spearmanr(wdr, leven, )
-    # print('Spearmnar Rank Coorelation Coefficient %0.3f' %spearmanr_coefficient)
+        # spearmanr_coefficient, p_value = spearmanr(wdr, leven, )
+        # print('Spearmnar Rank Coorelation Coefficient %0.3f' %spearmanr_coefficient)
 
 
-    print(posts.isnull().sum())
-    # Checking if our target is ordinary or binary
-    sb.countplot(x='is_bot', data=posts, palette='hls')
-    plt.savefig('Results/zscore/binary_target_check.PNG', format='png')
-    plt.show()
-    print(posts.info())
+        print(posts.isnull().sum())
+        # Checking if our target is ordinary or binary
+        sb.countplot(x='is_bot', data=posts, palette='hls')
+        plt.savefig('Results/'+embedding+'/binary_target_check.PNG', format='png')
+        plt.show()
+        print(posts.info())
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.1, random_state=47)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.1, random_state=47)
 
-    LogReg = LogisticRegression()
-    LogReg.fit(X_train, y_train)
+        LogReg = LogisticRegression()
+        LogReg.fit(X_train, y_train)
 
-    y_pred = LogReg.predict(X_test)
+        y_pred = LogReg.predict(X_test)
 
-    confusion_matrix = confusion_matrix(y_test, y_pred)
-    print('confusion_matrix')
-    print(confusion_matrix)
-    sb.heatmap(confusion_matrix,annot=True)
-    plt.savefig('Results/zscore/confusion_matrix.PNG', format='png')
-    plt.show()
+        my_confusion_matrix = confusion_matrix(y_test, y_pred)
+        print('confusion_matrix')
+        print(my_confusion_matrix)
+        sb.heatmap(my_confusion_matrix,annot=True,fmt="d",cmap="YlGnBu",xticklabels=['bot','non-bot'], yticklabels=['bot','non-bot'])
+        plt.savefig('Results/'+embedding+'/confusion_matrix.PNG', format='png')
+        plt.show()
 
-    with open('Results/zscore/stats.txt', 'w+') as statsFile:
-        statsFile.write(metrics.classification_report(y_test, y_pred))
-    # x = scale(posts_data)
-    # # initialize logistic regression model
+        with open('Results/'+embedding+'/stats.txt', 'w+') as statsFile:
+            statsFile.write(metrics.classification_report(y_test, y_pred))
+        # x = scale(posts_data)
+        # # initialize logistic regression model
     # LogReg = LogisticRegression()
     # LogReg.fit(x, y)
     # # The closer to 1 the better the fit
