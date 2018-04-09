@@ -99,6 +99,12 @@ def separated_embeddings(data):
     for file in data:
         if file == 'mds':
             data_range = (0, 1)
+        elif file == 'spectral':
+            data_range = ()
+            for val in range(1, 501):
+                data_range = data_range + (val,)
+            # print(data_range)
+            # data_range = (1,2,3,4,5,6,7,8,9,10)
         else:
             data_range = (0, 1, 2)
 
@@ -116,5 +122,5 @@ def separated_embeddings(data):
 if __name__ == '__main__':
     files = ['zscore', 'recoded', 'ranked', 'rescaled', 'mds', 'spectral']
 
-    combined_embeddings(files)
-    #separated_embeddings(files)
+    #combined_embeddings(files)
+    separated_embeddings(files)
