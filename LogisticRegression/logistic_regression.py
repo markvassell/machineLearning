@@ -65,7 +65,7 @@ def combined_embeddings(data):
             posts_data = X = posts.ix[:, (1, 2)]
         elif name == 'spectral':
             y = y = posts.ix[:, 0].values
-            posts_data = X = posts.ix[:, 1:501]
+            posts_data = X = posts.ix[:, 1:1000]
             print(posts_data.head())
         else:
             y = posts.ix[:, 3].values
@@ -122,5 +122,5 @@ def separated_embeddings(data):
 if __name__ == '__main__':
     files = ['zscore', 'recoded', 'ranked', 'rescaled', 'mds', 'spectral']
 
-    #combined_embeddings(files)
+    combined_embeddings(files)
     separated_embeddings(files)
