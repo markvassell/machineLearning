@@ -21,10 +21,6 @@ Continuation of support based on factors
 
 This predicts an outcome, and it also provides a probability of that prediction being correct.
 
-True Neg  | False Pos
-False Neg | True Pos
-
-
 # Correlation
 The correlation plots may not seem straight forward so here is the breakdown:
 1 - perfect positive correlation
