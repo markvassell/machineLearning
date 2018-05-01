@@ -73,6 +73,10 @@ def prepare_data():
     spectral_combined_data  = pd.read_csv(spectral_combined_data_url, header=None)
     spectral_combined_data = spectral_combined_data.ix[1:, :]
     all_data_set.append(['Aquila\'s Spectral', spectral_combined_data])
+
+    mds_combined_data_url = 'https://raw.githubusercontent.com/tonikazic/munlp_f17/master/s18/results/embeddings/will/metric_mds_compiled.csv?token=AI7HgcIYXltV6_gcFuSd2hiFp4mxYkYgks5a8gzFwA%3D%3D'
+    mds_combined_data = pd.read_csv(mds_combined_data_url)
+    all_data_set.append(['Will\'s MDS', mds_combined_data])
     return all_data_set
 
 def main():
@@ -90,12 +94,16 @@ def main():
             # split the loaded dataset into two, 80% of which we will use to train our models and 20% that we will hold back as
             # a validation data set
             validation_size = 0.15
-            if 'Spectral' not in id:
-                X = data.ix[:, (1,2,3)].values
-                Y = data.ix[:, 4].values
-            else:
+            if 'Spectral' in id:
                 X = data.ix[:, 1:50].values
                 Y = data.ix[:, 0].values
+            elif 'MDS' in id:
+                X = data.ix[:, (2,3)].values
+                Y = data.ix[:,1].values
+
+            else:
+                X = data.ix[:, (1, 2, 3)].values
+                Y = data.ix[:, 4].values
             seed = 34
             X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size,
                                                                                             random_state=seed)

@@ -1,7 +1,8 @@
-Mark's Ranked Data:LR  	mean = 0.579182 	std = (0.030129) 
+Mark's Ranked Data:
+LR  	mean = 0.579182 	std = (0.030129) 
 LDA  	mean = 0.581532 	std = (0.029867) 
 KNN  	mean = 0.599158 	std = (0.036702) 
-CART  	mean = 0.565054 	std = (0.032912) 
+CART  	mean = 0.579175 	std = (0.040148) 
 NB  	mean = 0.572663 	std = (0.043450) 
 SVM  	mean = 0.526808 	std = (0.043996) 
 
@@ -15,10 +16,11 @@ Accuracy: 0.6133333333333333
 
 avg / total       0.61      0.61      0.61       300
 
-Samaikya's Rescaled Data:LR  	mean = 0.525632 	std = (0.044537) 
+Samaikya's Rescaled Data:
+LR  	mean = 0.525632 	std = (0.044537) 
 LDA  	mean = 0.610362 	std = (0.018303) 
 KNN  	mean = 0.703348 	std = (0.040901) 
-CART  	mean = 0.660978 	std = (0.039639) 
+CART  	mean = 0.660964 	std = (0.043663) 
 NB  	mean = 0.523227 	std = (0.038141) 
 SVM  	mean = 0.525632 	std = (0.044537) 
 
@@ -32,7 +34,8 @@ Accuracy: 0.7233333333333334
 
 avg / total       0.72      0.72      0.72       300
 
-Derek's Scoring Data:LR  	mean = 0.978225 	std = (0.011776) 
+Derek's Scoring Data:
+LR  	mean = 0.978225 	std = (0.011776) 
 LDA  	mean = 0.985287 	std = (0.011540) 
 KNN  	mean = 0.586822 	std = (0.026567) 
 CART  	mean = 0.994706 	std = (0.004886) 
@@ -49,10 +52,11 @@ Accuracy: 0.9966666666666667
 
 avg / total       1.00      1.00      1.00       300
 
-Rui's Zscore Data:LR  	mean = 0.625054 	std = (0.035905) 
+Rui's Zscore Data:
+LR  	mean = 0.625054 	std = (0.035905) 
 LDA  	mean = 0.610362 	std = (0.018303) 
 KNN  	mean = 0.697459 	std = (0.046695) 
-CART  	mean = 0.658611 	std = (0.041855) 
+CART  	mean = 0.662753 	std = (0.042503) 
 NB  	mean = 0.523227 	std = (0.038141) 
 SVM  	mean = 0.718107 	std = (0.037948) 
 
@@ -66,10 +70,11 @@ Accuracy: 0.69
 
 avg / total       0.70      0.69      0.68       300
 
-Sai's Recoded Data:LR  	mean = 0.605962 	std = (0.047978) 
+Sai's Recoded Data:
+LR  	mean = 0.605962 	std = (0.047978) 
 LDA  	mean = 0.604219 	std = (0.040877) 
 KNN  	mean = 0.588956 	std = (0.032829) 
-CART  	mean = 0.637208 	std = (0.037143) 
+CART  	mean = 0.637797 	std = (0.038166) 
 NB  	mean = 0.529997 	std = (0.036007) 
 SVM  	mean = 0.641914 	std = (0.039333) 
 
@@ -83,10 +88,11 @@ Accuracy: 0.6866666666666666
 
 avg / total       0.73      0.69      0.67       300
 
-Aquila's Spectral Data:LR  	mean = 0.511471 	std = (0.047573) 
+Aquila's Spectral Data:
+LR  	mean = 0.511471 	std = (0.047573) 
 LDA  	mean = 0.579233 	std = (0.036220) 
 KNN  	mean = 0.542326 	std = (0.030752) 
-CART  	mean = 0.533903 	std = (0.033693) 
+CART  	mean = 0.537503 	std = (0.027180) 
 NB  	mean = 0.504885 	std = (0.038550) 
 SVM  	mean = 0.507229 	std = (0.037370) 
 
@@ -99,4 +105,22 @@ Accuracy: 0.6279863481228669
         1.0       0.63      0.77      0.69       161
 
 avg / total       0.63      0.63      0.62       293
+
+Will's MDS Data:
+LR  	mean = 0.573768 	std = (0.027301) 
+LDA  	mean = 0.568941 	std = (0.022579) 
+KNN  	mean = 0.546572 	std = (0.023537) 
+CART  	mean = 0.540555 	std = (0.038475) 
+NB  	mean = 0.530197 	std = (0.028726) 
+SVM  	mean = 0.567134 	std = (0.021774) 
+
+Accuracy: 0.5836177474402731
+[[ 67  65]
+ [ 57 104]]
+             precision    recall  f1-score   support
+
+          0       0.54      0.51      0.52       132
+          1       0.62      0.65      0.63       161
+
+avg / total       0.58      0.58      0.58       293
 
