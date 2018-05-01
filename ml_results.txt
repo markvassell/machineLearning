@@ -1,0 +1,102 @@
+Mark's Ranked Data:LR  	mean = 0.579182 	std = (0.030129) 
+LDA  	mean = 0.581532 	std = (0.029867) 
+KNN  	mean = 0.599158 	std = (0.036702) 
+CART  	mean = 0.565054 	std = (0.032912) 
+NB  	mean = 0.572663 	std = (0.043450) 
+SVM  	mean = 0.526808 	std = (0.043996) 
+
+Accuracy: 0.6133333333333333
+[[87 58]
+ [58 97]]
+             precision    recall  f1-score   support
+
+          0       0.60      0.60      0.60       145
+          1       0.63      0.63      0.63       155
+
+avg / total       0.61      0.61      0.61       300
+
+Samaikya's Rescaled Data:LR  	mean = 0.525632 	std = (0.044537) 
+LDA  	mean = 0.610362 	std = (0.018303) 
+KNN  	mean = 0.703348 	std = (0.040901) 
+CART  	mean = 0.660978 	std = (0.039639) 
+NB  	mean = 0.523227 	std = (0.038141) 
+SVM  	mean = 0.525632 	std = (0.044537) 
+
+Accuracy: 0.7233333333333334
+[[ 99  46]
+ [ 37 118]]
+             precision    recall  f1-score   support
+
+          0       0.73      0.68      0.70       145
+          1       0.72      0.76      0.74       155
+
+avg / total       0.72      0.72      0.72       300
+
+Derek's Scoring Data:LR  	mean = 0.978225 	std = (0.011776) 
+LDA  	mean = 0.985287 	std = (0.011540) 
+KNN  	mean = 0.586822 	std = (0.026567) 
+CART  	mean = 0.994706 	std = (0.004886) 
+NB  	mean = 0.977630 	std = (0.009050) 
+SVM  	mean = 0.588019 	std = (0.033907) 
+
+Accuracy: 0.9966666666666667
+[[152   1]
+ [  0 147]]
+             precision    recall  f1-score   support
+
+          0       1.00      0.99      1.00       153
+          1       0.99      1.00      1.00       147
+
+avg / total       1.00      1.00      1.00       300
+
+Rui's Zscore Data:LR  	mean = 0.625054 	std = (0.035905) 
+LDA  	mean = 0.610362 	std = (0.018303) 
+KNN  	mean = 0.697459 	std = (0.046695) 
+CART  	mean = 0.658611 	std = (0.041855) 
+NB  	mean = 0.523227 	std = (0.038141) 
+SVM  	mean = 0.718107 	std = (0.037948) 
+
+Accuracy: 0.69
+[[ 81  64]
+ [ 29 126]]
+             precision    recall  f1-score   support
+
+          0       0.74      0.56      0.64       145
+          1       0.66      0.81      0.73       155
+
+avg / total       0.70      0.69      0.68       300
+
+Sai's Recoded Data:LR  	mean = 0.605962 	std = (0.047978) 
+LDA  	mean = 0.604219 	std = (0.040877) 
+KNN  	mean = 0.588956 	std = (0.032829) 
+CART  	mean = 0.637208 	std = (0.037143) 
+NB  	mean = 0.529997 	std = (0.036007) 
+SVM  	mean = 0.641914 	std = (0.039333) 
+
+Accuracy: 0.6866666666666666
+[[ 65  80]
+ [ 14 141]]
+             precision    recall  f1-score   support
+
+          0       0.82      0.45      0.58       145
+          1       0.64      0.91      0.75       155
+
+avg / total       0.73      0.69      0.67       300
+
+Aquila's Spectral Data:LR  	mean = 0.511471 	std = (0.047573) 
+LDA  	mean = 0.579233 	std = (0.036220) 
+KNN  	mean = 0.542326 	std = (0.030752) 
+CART  	mean = 0.533903 	std = (0.033693) 
+NB  	mean = 0.504885 	std = (0.038550) 
+SVM  	mean = 0.507229 	std = (0.037370) 
+
+Accuracy: 0.6279863481228669
+[[ 60  72]
+ [ 37 124]]
+             precision    recall  f1-score   support
+
+        0.0       0.62      0.45      0.52       132
+        1.0       0.63      0.77      0.69       161
+
+avg / total       0.63      0.63      0.62       293
+

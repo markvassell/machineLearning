@@ -69,78 +69,94 @@ def prepare_data():
     recoded_combined_data = pd.read_csv(recoded_combined_data_url)
     all_data_set.append(['Sai\'s Recoded', recoded_combined_data])
 
+    spectral_combined_data_url = 'https://raw.githubusercontent.com/tonikazic/munlp_f17/master/s18/results/embeddings/aquila-Spectral/bot%26not_Compiled_spectral.csv?token=AI7HgR9OvZczdiAkpn93uZDfqF_JI0Yyks5a8fFiwA%3D%3D'
+    spectral_combined_data  = pd.read_csv(spectral_combined_data_url, header=None)
+    spectral_combined_data = spectral_combined_data.ix[1:, :]
+    all_data_set.append(['Aquila\'s Spectral', spectral_combined_data])
     return all_data_set
 
 def main():
-
+    print(style.GREEN + style.BOLD + style.UNDERLINE + 'The program is loading in the data. Give it a sec.' +style.END)
 
     data_sets = prepare_data()
+    with open('ml_results.txt', 'w+') as out_results:
+        for id, data in data_sets:
+            print(style.RED + style.BOLD + style.UNDERLINE + id + ' Data:' +style.END)
 
-    for id, data in data_sets:
-        print(style.RED + style.BOLD + style.UNDERLINE + id + ' Data:' +style.END)
+            # print(scatter_matrix(combined_data))
+            # plt.show()
 
-        # print(scatter_matrix(combined_data))
-        # plt.show()
-
-        # Create a Validation Data set
-        # split the loaded dataset into two, 80% of which we will use to train our models and 20% that we will hold back as
-        # a validation data set
-        validation_size = 0.15
-        X = data.ix[:, (1,2,3)].values
-        Y = data.ix[:, 4].values
-        seed = 34
-        X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size,
-                                                                                        random_state=seed)
-
-
-        model_dict = {'LR' : 'Logistic Regression',
-                      'LDA': 'Linear Discriminant Analysis',
-                      'KNN':'K Neighbors Classifier',
-                      'CART':'Decision Tree Classifier',
-                      'NB':'Gaussian Naive Bayes',
-                      'SVM':'Support Vector Classification'
-                      }
-        scoring = 'accuracy'
-        # Spot Check Algorithms
-        models = []
-        models.append(('LR', LogisticRegression()))
-        models.append(('LDA', LinearDiscriminantAnalysis()))
-        models.append(('KNN', KNeighborsClassifier()))
-        models.append(('CART', DecisionTreeClassifier()))
-        models.append(('NB', GaussianNB()))
-        models.append(('SVM', SVC()))
-        # evaluate each model in turn
-        results = []
-        names = []
-        best_model_score, best_model, model_name  = 0, None, None
-
-        display_msg = ''
-        for name, model in models:
-            kfold = model_selection.KFold(n_splits=10, random_state=seed)
-            cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
-            results.append(cv_results)
-            names.append(name)
-            display_msg += "%s  \tmean = %f \tstd = (%f) \n" % (name, cv_results.mean(), cv_results.std())
-
-            if cv_results.mean() > best_model_score:
-                best_model = model
-                best_model_score = cv_results.mean()
-                model_name = name
+            # Create a Validation Data set
+            # split the loaded dataset into two, 80% of which we will use to train our models and 20% that we will hold back as
+            # a validation data set
+            validation_size = 0.15
+            if 'Spectral' not in id:
+                X = data.ix[:, (1,2,3)].values
+                Y = data.ix[:, 4].values
+            else:
+                X = data.ix[:, 1:50].values
+                Y = data.ix[:, 0].values
+            seed = 34
+            X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size,
+                                                                                            random_state=seed)
 
 
-        print(display_msg)
+            model_dict = {'LR' : 'Logistic Regression',
+                          'LDA': 'Linear Discriminant Analysis',
+                          'KNN':'K Neighbors Classifier',
+                          'CART':'Decision Tree Classifier',
+                          'NB':'Gaussian Naive Bayes',
+                          'SVM':'Support Vector Classification'
+                          }
+            scoring = 'accuracy'
+            # Spot Check Algorithms
+            models = []
+            models.append(('LR', LogisticRegression()))
+            models.append(('LDA', LinearDiscriminantAnalysis()))
+            models.append(('KNN', KNeighborsClassifier()))
+            models.append(('CART', DecisionTreeClassifier()))
+            models.append(('NB', GaussianNB()))
+            models.append(('SVM', SVC()))
+            # evaluate each model in turn
+            results = []
+            names = []
+            best_model_score, best_model, model_name  = 0, None, None
 
-        # Make predictions on validation dataset
-        selected_model = best_model
-        selected_model.fit(X_train, Y_train)
-        predictions = selected_model.predict(X_validation)
-        print('The best model: '+ style.GREEN + model_dict[model_name] + style.END)
-        print('Accuracy: ', accuracy_score(Y_validation, predictions))
-        print(confusion_matrix(Y_validation, predictions))
-        print(classification_report(Y_validation, predictions))
+            display_msg = ''
+
+            for name, model in models:
+                kfold = model_selection.KFold(n_splits=10, random_state=seed)
+                cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
+                results.append(cv_results)
+                names.append(name)
+                display_msg += "%s  \tmean = %f \tstd = (%f) \n" % (name, cv_results.mean(), cv_results.std())
+
+                if cv_results.mean() > best_model_score:
+                    best_model = model
+                    best_model_score = cv_results.mean()
+                    model_name = name
+
+
+            print(display_msg)
+
+            # Make predictions on validation dataset
+            selected_model = best_model
+            selected_model.fit(X_train, Y_train)
+            predictions = selected_model.predict(X_validation)
+            print('The best model: '+ style.GREEN + model_dict[model_name] + style.END)
+            print('Accuracy: ', accuracy_score(Y_validation, predictions))
+            print(confusion_matrix(Y_validation, predictions))
+            print(classification_report(Y_validation, predictions))
+
+            out_results.write( id + ' Data:\n')
+            out_results.write(display_msg + '\n')
+            out_results.write('Accuracy: ' + str(accuracy_score(Y_validation, predictions)) + '\n')
+            out_results.write(str(confusion_matrix(Y_validation, predictions)) + '\n')
+            out_results.write(str(classification_report(Y_validation, predictions)) + '\n')
 
 if __name__ == '__main__':
     main()
+    print(style.BOLD + style.CYAN + 'The data has been written to ml_results.txt' + style.END)
 
 
 # K Neighbors Classifier
