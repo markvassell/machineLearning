@@ -38,7 +38,7 @@ def binary_check(outFile, data):
     plt.savefig(outFile, format='png')
     # plt.show()
     plt.close()
-    print(data.info())
+    # print(data.info())
 
 
 def generate_confusion_matrix(matrix,outFile,title):
@@ -66,7 +66,7 @@ def combined_embeddings(data):
         elif name == 'spectral':
             y = y = posts.ix[:, 0].values
             posts_data = X = posts.ix[:, 1:1000]
-            print(posts_data.head())
+           # print(posts_data.head())
         else:
             y = posts.ix[:, 3].values
             posts_data = X = posts.ix[:, (0, 1, 2)]
@@ -74,13 +74,16 @@ def combined_embeddings(data):
 
         get_correlation('Results/'+embedding+'/combined/attribute_correlations.PNG', posts_data)
 
-        print(posts.isnull().sum())
+        #print(posts.isnull().sum())
         binary_check('Results/' + embedding + '/combined/binary_target_check.PNG', posts)
 
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.1, random_state=47)
 
         logReg = LogisticRegression()
         logReg.fit(X_train, y_train)
+
+        print("Mean accuracy on the given test data and labels: ",logReg.score(X_train,y_train))
+
 
         y_pred = logReg.predict(X_test)
 
